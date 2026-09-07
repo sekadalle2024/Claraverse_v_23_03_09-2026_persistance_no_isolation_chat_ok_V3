@@ -3217,12 +3217,13 @@ const ClaraAssistantInput: React.FC<ClaraInputProps> = ({
       return;
     }
 
-    // Check provider health before sending
-    const isProviderHealthy = await checkProviderHealth();
-    if (!isProviderHealthy) {
-      console.log('🟡 [INPUT] handleSend aborted: provider not healthy');
-      return; // Don't send message if provider is not healthy
-    }
+    // 🚫 DÉSACTIVÉ : Vérification provider (utilise workflows n8n maintenant)
+    // const isProviderHealthy = await checkProviderHealth();
+    // if (!isProviderHealthy) {
+    //   console.log('🟡 [INPUT] handleSend aborted: provider not healthy');
+    //   return; // Don't send message if provider is not healthy
+    // }
+    console.log('✅ [INPUT] Provider check DISABLED - using n8n workflows');
     
     let attachments: ClaraFileAttachment[] | undefined;
     let enhancedPrompt = input; // For AI processing
@@ -3628,11 +3629,13 @@ const ClaraAssistantInput: React.FC<ClaraInputProps> = ({
   };
 
   // Check for provider health when switching modes
-  useEffect(() => {
-    if (sessionConfig?.aiConfig?.provider) {
-      checkProviderHealth();
-    }
-  }, [sessionConfig?.aiConfig?.provider, checkProviderHealth]);
+  // 🚫 DÉSACTIVÉ : Vérification automatique du provider (utilise workflows n8n maintenant)
+  // useEffect(() => {
+  //   if (sessionConfig?.aiConfig?.provider) {
+  //     checkProviderHealth();
+  //   }
+  // }, [sessionConfig?.aiConfig?.provider, checkProviderHealth]);
+  console.log('✅ [INIT] Provider auto-check DISABLED - using n8n workflows');
 
   // Load available image models for image generation
   useEffect(() => {
